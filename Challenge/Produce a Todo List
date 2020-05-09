@@ -1,0 +1,8 @@
+Buat Sebuah Activity
+Buat Textview untuk menampilkan score dan waktu
+Buat sebuah button yang bertuliskan "Start" untuk memulai game
+Ketika button "Start" di tekan maka tulisan akan berubah menjadi "Tap me" untuk memainkan game, dan waktu akan berjalan mundur.
+Ketika button "Tap me" ditekan maka skor akan bertambah 1.
+Ketika user menekan tombol "home" atau "recent task" maka game akan terpause sementara dan akan dilanjutkan ketika user kembali ke game.
+Ketika waktu sudah habis maka akan muncul notifikasi berbentuk toast atau dialog yang berisi skor yang didapat selama permainan berlangsung.
+Ketika permainan selesai maka button kembali bertuliskan "Start".
