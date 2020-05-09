@@ -39,7 +39,13 @@ class MainActivity : AppCompatActivity() {
         scoreTextView = findViewById(R.id.score)
         timeLeftTextView = findViewById(R.id.timeleft)
 
-        resetGame()
+        if (savedInstanceState != null){
+           score =  savedInstanceState.getInt(SCORE_KEY)
+           timeLeftOnTimer =  savedInstanceState.getLong(TIMELEFT_KEY)
+            restoreGame()
+        }else{
+            resetGame()
+        }
 
         btnStart.setOnClickListener { view ->
             incrementScore()
@@ -104,6 +110,28 @@ class MainActivity : AppCompatActivity() {
     private fun endGame(){
         Toast.makeText(this, getString(R.string.gameOver, score), Toast.LENGTH_LONG).show()
         resetGame()
+    }
+
+    private fun restoreGame(){
+        scoreTextView.text = getString(R.string.yourScore, score)
+
+        val restoredTime = timeLeftOnTimer / 1000
+        timeLeftTextView.text = getString(R.string.timeLeft, restoredTime)
+
+        countDownTimer = object : CountDownTimer(timeLeftOnTimer, countDownInterval){
+            override fun onFinish() {
+                endGame()
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeftOnTimer = millisUntilFinished
+                val timeLeft = millisUntilFinished /1000
+                timeLeftTextView.text = getString(R.string.timeLeft, timeLeft)
+            }
+
+        }
+        countDownTimer.start()
+        gameStarted = true
     }
 
 }
