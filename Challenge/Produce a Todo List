@@ -1,4 +1,3 @@
-Buat Sebuah Activity
 Buat Textview untuk menampilkan score dan waktu
 Buat sebuah button yang bertuliskan "Start" untuk memulai game
 Ketika button "Start" di tekan maka tulisan akan berubah menjadi "Tap me" untuk memainkan game, dan waktu akan berjalan mundur.
