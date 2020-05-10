@@ -3,8 +3,8 @@ package com.averoes.timefighter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.PersistableBundle
 import android.util.Log
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnStart.setOnClickListener { view ->
+            val bounceAnimator = AnimationUtils.loadAnimation(this, R.anim.bounce)
+            view.startAnimation(bounceAnimator)
             incrementScore()
         }
     }
@@ -96,6 +98,8 @@ class MainActivity : AppCompatActivity() {
         if (!gameStarted){
             startGame()
         }
+        val blinkAnimator = AnimationUtils.loadAnimation(this, R.anim.blink)
+        scoreTextView.startAnimation(blinkAnimator)
         score += 1
         val newScore = getString(R.string.yourScore, score)
         scoreTextView.text = newScore
