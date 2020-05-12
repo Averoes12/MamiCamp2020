@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Octo Members</string>
+    <string name="team_hint">Enter a team name</string>
+    <string name="team_button">SHOW MEMBERS</string>
+    <string name="default_team_name">raywenderlich</string>
+    <string name="error_retrieving_team">Error retrieving team</string>
+    <string name="error_retrieving_member">Error retrieving member</string>
+    <string name="error_team_name_empty">Team name cannot be empty</string>
+    <string name="avatar">avatar</string>
+    <string name="label_name">Name:</string>
+    <string name="label_login">Username</string>
+    <string name="label_email">Email:</string>
+    <string name="label_company">Company:</string>
+    <string name="label_type">Type:</string>
+  <string name="detail_member_avatar">Detail member avatar</string>
+  <string name="empty_state_text">No members found for %1$s.</string>
+</resources>

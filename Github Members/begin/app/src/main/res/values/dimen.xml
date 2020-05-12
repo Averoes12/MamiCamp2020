@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pading_standar">16dp</dimen>
+    <dimen name="text_login">18sp</dimen>
+    <dimen name="list_item_height">8dp</dimen>
+    <dimen name="list_item_width">8dp</dimen>
+    <dimen name="text_type_member">14sp</dimen>
+    <dimen name="pading_half">8dp</dimen>
+    <dimen name="pading_double">32</dimen>
+    <dimen name="detail_avatar_size">144dp</dimen>
+    <dimen name="detail_text_size">16sp</dimen>
+    <dimen name="detail_avatar_container_size">250dp</dimen>
+</resources>
