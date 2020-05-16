@@ -21,16 +21,21 @@
     <!--    Use for rippled effect on touch-->
 
     <LinearLayout
+        android:id="@+id/cardRippled"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal"/>
+
+
+    <LinearLayout
         android:id="@+id/nicknameHolder"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_nickname_holder_height"
         android:layout_gravity="bottom"
-        android:alpha="0.6"
         android:background="@color/colorAccent"
+        android:alpha="0.9"
         android:orientation="horizontal"
-
-        >
-
+        android:layout_height="36dp">
         <TextView
             android:id="@+id/nickname"
             android:layout_width="match_parent"
@@ -44,6 +49,7 @@
             android:textStyle="bold"
             android:textSize="@dimen/creature_name_textSize"
             tools:text="NickName" />
+
 
     </LinearLayout>
 
