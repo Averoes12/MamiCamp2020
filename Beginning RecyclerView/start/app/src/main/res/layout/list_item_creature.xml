@@ -34,7 +34,7 @@
         tools:text="Full name" />
 
     <TextView
-        android:id="@+id/nickname"
+        android:id="@+id/fullName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
