@@ -33,6 +33,7 @@ package com.raywenderlich.android.creatures.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.widget.Toast
@@ -41,6 +42,8 @@ import com.raywenderlich.android.creatures.adapter.FoodAdapter
 import com.raywenderlich.android.creatures.model.Favorites
 import com.raywenderlich.android.creatures.model.Creature
 import com.raywenderlich.android.creatures.model.CreatureStore
+import com.raywenderlich.android.creatures.utils.DividingItemDecoration
+import com.raywenderlich.android.creatures.utils.FoodItemDecoration
 import kotlinx.android.synthetic.main.activity_creature.*
 
 class CreatureActivity : AppCompatActivity() {
@@ -115,6 +118,9 @@ class CreatureActivity : AppCompatActivity() {
   }
 
   fun setUpFood(){
+
+    val dividerWithInPixel = resources.getDimensionPixelSize(R.dimen.list_item_divider_height)
+    foodList.addItemDecoration(FoodItemDecoration(ContextCompat.getColor(this, R.color.colorDivider), dividerWithInPixel))
     foodList.layoutManager = GridLayoutManager(this,3,  GridLayoutManager.VERTICAL, false)
     foodList.adapter = foodAdapter
 
