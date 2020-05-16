@@ -51,7 +51,7 @@
                 android:maxLines="3"
                 android:padding="@dimen/padding_half"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/creature_name_textSize"
+                android:textSize="@dimen/creature_card_text_size"
                 android:textStyle="bold"
                 tools:text="NickName" />
 
