@@ -3,13 +3,14 @@ package com.raywenderlich.android.creatures.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.app.inflate
 import com.raywenderlich.android.creatures.model.Creature
 import com.raywenderlich.android.creatures.ui.CreatureActivity
 import kotlinx.android.synthetic.main.list_item_creature.view.*
 
-class CreaturesAdapter (private val creature:MutableList<Creature>) : RecyclerView.Adapter<CreaturesAdapter.ViewHolder>() {
+class FavoriteAdapter (private val creature:MutableList<Creature>) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
 
     fun updateCreature(creature: List<Creature>){
@@ -42,6 +43,7 @@ class CreaturesAdapter (private val creature:MutableList<Creature>) : RecyclerVi
             itemView.creatureImage.setImageResource(context.resources.getIdentifier(creature.uri, null, context.packageName))
             itemView.fullNames.text = creature.fullName
             itemView.nickname.text = creature.nickname
+            animationView(itemView)
 
         }
 
@@ -50,6 +52,13 @@ class CreaturesAdapter (private val creature:MutableList<Creature>) : RecyclerVi
             val context = view.context
             val detailScreen = CreatureActivity.newIntent(context, creatureId = creature.id)
             context.startActivity(detailScreen)
+        }
+
+        private fun animationView(viewToAnimation:View){
+            if (viewToAnimation.animation == null){
+                val animation = AnimationUtils.loadAnimation(itemView.context, R.anim.scale_anim)
+                viewToAnimation.animation = animation
+            }
         }
     }
 }

@@ -74,8 +74,8 @@ class CreaturesCardAdapter (private val creature:MutableList<Creature>) : Recycl
 
         private fun animationView(viewToAnimation:View){
             if (viewToAnimation.animation == null){
-                val animId = if (scrollDirection == ScrollDirection.DOWN) R.anim.slide_from_bottom else R.anim.slide_from_top
-                val animation = AnimationUtils.loadAnimation(itemView.context, animId)
+//                val animId = if (scrollDirection == ScrollDirection.DOWN) R.anim.slide_from_bottom else R.anim.slide_from_top
+                val animation = AnimationUtils.loadAnimation(itemView.context, R.anim.scale_anim)
                 viewToAnimation.animation = animation
             }
         }
