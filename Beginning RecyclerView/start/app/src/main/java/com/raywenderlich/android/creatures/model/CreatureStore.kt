@@ -31,6 +31,7 @@
 package com.raywenderlich.android.creatures.model
 
 import android.content.Context
+import android.support.v4.app.FragmentActivity
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -64,6 +65,9 @@ object CreatureStore {
   }
 
   fun getCreatures() = creatures
+
+  fun getFavoriteCreature(context: Context) : List<Creature>? =
+          Favorites.getFavorites(context)?.mapNotNull { getCreatureById(it) }
 
   fun getCreatureById(id: Int) = creatures.firstOrNull { it.id == id }
 
