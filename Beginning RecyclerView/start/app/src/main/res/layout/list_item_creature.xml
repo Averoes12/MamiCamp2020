@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_creature_height">
+    android:layout_height="@dimen/list_item_with_divider_height">
 
     <ImageView
         android:id="@+id/creatureImage"
@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/creature_cat_derp" />
 
     <TextView
-        android:id="@+id/fullName"
+        android:id="@+id/fullNames"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding_standard"
@@ -34,7 +34,7 @@
         tools:text="Full name" />
 
     <TextView
-        android:id="@+id/fullName"
+        android:id="@+id/nickname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
@@ -43,7 +43,7 @@
         android:layout_marginEnd="@dimen/padding_standard"
         android:layout_marginBottom="@dimen/padding_half"
         app:layout_constraintStart_toEndOf="@id/creatureImage"
-        app:layout_constraintTop_toBottomOf="@id/fullName"
+        app:layout_constraintTop_toBottomOf="@id/fullNames"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="Nickname" />

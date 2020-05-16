@@ -32,6 +32,8 @@ package com.raywenderlich.android.creatures.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +41,7 @@ import android.view.ViewGroup
 import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.adapter.CreaturesAdapter
 import com.raywenderlich.android.creatures.model.CreatureStore
+import com.raywenderlich.android.creatures.utils.DividingItemDecoration
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
@@ -61,6 +64,9 @@ class FavoritesFragment : Fragment() {
 
     favoriteList.layoutManager = LinearLayoutManager(activity)
     favoriteList.adapter = favoriteAdapter
+
+    val heightInPixels = resources.getDimensionPixelSize(R.dimen.list_item_divider_height)
+    favoriteList.addItemDecoration(DividingItemDecoration(ContextCompat.getColor(context!!, R.color.colorDivider), heightInPixels))
   }
 
   override fun onResume() {

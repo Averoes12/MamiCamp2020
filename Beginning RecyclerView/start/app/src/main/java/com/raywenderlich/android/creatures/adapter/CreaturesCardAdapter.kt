@@ -12,7 +12,6 @@ import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.app.inflate
 import com.raywenderlich.android.creatures.model.Creature
 import com.raywenderlich.android.creatures.ui.CreatureActivity
-import kotlinx.android.synthetic.main.list_item_creature.view.fullName
 import kotlinx.android.synthetic.main.list_item_creature_card.view.*
 
 class CreaturesCardAdapter (private val creature:MutableList<Creature>) : RecyclerView.Adapter<CreaturesCardAdapter.ViewHolder>() {
