@@ -61,6 +61,10 @@ class EpisodeRepository @Inject constructor(
     .flowOn(defaultDispatcher)
     .conflate()
 
+   fun getEpisodesForTrilogy(trilogy: Trilogy):Flow<List<Episode>>{
+    return episodeDao.getEpisodesForTrilogyNumberFlow(trilogyNumber = trilogy.number)
+  }
+
   private fun shouldUpdateEpisodesCache(): Boolean {
     return true
   }

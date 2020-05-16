@@ -40,10 +40,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raywenderlich.android.episodes.model.Episode
 import com.raywenderlich.android.episodes.model.EpisodeRepository
+import com.raywenderlich.android.episodes.model.NoTrilogy
 import com.raywenderlich.android.episodes.model.Trilogy
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -62,10 +63,26 @@ class EpisodesViewModel @Inject constructor(
   val spinner: LiveData<Boolean>
     get() = _spinner
 
+
   private val trilogyChannel = ConflatedBroadcastChannel<Trilogy>()
 
   val episodeUsingFlow : Flow<List<Episode>> =
-    episodeRepository.episodesFlow
+    trilogyChannel.asFlow()
+      .flatMapLatest {
+        trilogy ->
+        _spinner.value = true
+        if (trilogy == NoTrilogy){
+          episodeRepository.episodesFlow
+        }else{
+          episodeRepository.getEpisodesForTrilogy(trilogy)
+        }
+      }
+      .onEach {
+        _spinner.value = false
+      }
+      .catch {  Throwable ->
+        _snackbar.value = Throwable.message
+      }
 
   init {
     clearTrilogyNumber()
@@ -74,10 +91,12 @@ class EpisodesViewModel @Inject constructor(
   }
 
   fun setTrilogyNumber(num: Int) {
+    trilogyChannel.offer(Trilogy(num))
     loadData { episodeRepository.tryUpdateRecentEpisodesForTrilogyCache(Trilogy(num)) }
   }
 
   private fun clearTrilogyNumber() {
+    trilogyChannel.offer(NoTrilogy)
     loadData { episodeRepository.tryUpdateRecentEpisodesCache() }
   }
 

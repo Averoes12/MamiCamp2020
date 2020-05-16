@@ -52,5 +52,7 @@ interface EpisodeDao {
   @Query("SELECT * FROM episode ORDER BY number")
   fun loadAllEpisodeFLow(): Flow<List<Episode>>
 
+  @Query("select * from episode where trilogy = :trilogyNumber order by number")
+  fun getEpisodesForTrilogyNumberFlow(trilogyNumber:Int):Flow<List<Episode>>
 
 }
