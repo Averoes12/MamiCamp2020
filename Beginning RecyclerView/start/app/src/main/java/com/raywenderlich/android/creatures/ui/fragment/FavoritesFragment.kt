@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-package com.raywenderlich.android.creatures.ui
+package com.raywenderlich.android.creatures.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -37,6 +37,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.raywenderlich.android.creatures.R
+import com.raywenderlich.android.creatures.adapter.CreaturesAdapter
 import com.raywenderlich.android.creatures.model.CreatureStore
 import kotlinx.android.synthetic.main.fragment_favorites.*
 

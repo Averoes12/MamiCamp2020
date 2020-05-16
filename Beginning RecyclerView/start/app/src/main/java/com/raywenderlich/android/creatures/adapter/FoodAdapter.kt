@@ -1,4 +1,4 @@
-package com.raywenderlich.android.creatures.ui
+package com.raywenderlich.android.creatures.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

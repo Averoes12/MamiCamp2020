@@ -1,4 +1,4 @@
-package com.raywenderlich.android.creatures.ui
+package com.raywenderlich.android.creatures.adapter
 
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.app.inflate
 import com.raywenderlich.android.creatures.model.Creature
+import com.raywenderlich.android.creatures.ui.CreatureActivity
 import kotlinx.android.synthetic.main.list_item_creature.view.fullName
 import kotlinx.android.synthetic.main.list_item_creature_card.view.*
 

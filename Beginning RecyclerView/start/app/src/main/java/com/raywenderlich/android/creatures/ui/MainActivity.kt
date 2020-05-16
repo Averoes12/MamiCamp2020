@@ -36,6 +36,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.app.AppCompatActivity
 import com.raywenderlich.android.creatures.R
+import com.raywenderlich.android.creatures.ui.fragment.AllFragment
+import com.raywenderlich.android.creatures.ui.fragment.FavoritesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

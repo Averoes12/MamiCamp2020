@@ -1,4 +1,4 @@
-package com.raywenderlich.android.creatures.ui
+package com.raywenderlich.android.creatures.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.app.inflate
 import com.raywenderlich.android.creatures.model.Creature
+import com.raywenderlich.android.creatures.ui.CreatureActivity
 import kotlinx.android.synthetic.main.list_item_creature.view.*
 
 class CreaturesAdapter (private val creature:MutableList<Creature>) : RecyclerView.Adapter<CreaturesAdapter.ViewHolder>() {

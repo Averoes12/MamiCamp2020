@@ -1,4 +1,4 @@
-package com.raywenderlich.android.creatures.ui
+package com.raywenderlich.android.creatures.adapter
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
@@ -9,12 +9,9 @@ import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.app.inflate
 import com.raywenderlich.android.creatures.model.Creature
 import com.raywenderlich.android.creatures.model.CreatureStore
-import kotlinx.android.synthetic.main.activity_creature.view.*
+import com.raywenderlich.android.creatures.ui.CreatureActivity
 import kotlinx.android.synthetic.main.activity_creature.view.foodList
-import kotlinx.android.synthetic.main.list_item_creature.view.*
 import kotlinx.android.synthetic.main.list_item_creature.view.creatureImage
-import kotlinx.android.synthetic.main.list_item_creature.view.fullName
-import kotlinx.android.synthetic.main.list_item_creature_with_food.view.*
 
 class CreaturesWithFoodAdapter (private val creature:MutableList<Creature>) : RecyclerView.Adapter<CreaturesWithFoodAdapter.ViewHolder>() {
 
@@ -38,7 +35,7 @@ class CreaturesWithFoodAdapter (private val creature:MutableList<Creature>) : Re
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
         private lateinit var creature: Creature
-        private val foodAdapter:FoodAdapter = FoodAdapter(mutableListOf())
+        private val foodAdapter: FoodAdapter = FoodAdapter(mutableListOf())
 
         init {
             itemView.setOnClickListener(this)
