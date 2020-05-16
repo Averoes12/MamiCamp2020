@@ -36,6 +36,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.*
+import android.widget.AbsListView
 import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.adapter.CreaturesCardAdapter
 import com.raywenderlich.android.creatures.model.CreatureStore
@@ -78,6 +79,18 @@ class AllFragment : Fragment() {
         gridItemDecoration = SpacingItemDecoration(2, spacingInPixels)
 
         creatureList.addItemDecoration(gridItemDecoration)
+
+        creatureList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                creaturesAdapter.scrollDirection = if (dy > 0){
+                    CreaturesCardAdapter.ScrollDirection.DOWN
+                }else{
+                    CreaturesCardAdapter.ScrollDirection.UP
+                }
+            }
+        })
     }
 
     private fun updateRecyclerView(spanCount: Int, addItemDecoration: RecyclerView.ItemDecoration,
