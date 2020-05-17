@@ -33,13 +33,16 @@ package com.raywenderlich.android.creatures.ui.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.*
 import android.widget.AbsListView
 import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.adapter.CreaturesCardAdapter
 import com.raywenderlich.android.creatures.model.CreatureStore
+import com.raywenderlich.android.creatures.utils.ItemTouchHelperCardCallback
 import com.raywenderlich.android.creatures.utils.SpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_all.*
 
@@ -48,6 +51,7 @@ class AllFragment : Fragment() {
 
     private val creaturesAdapter = CreaturesCardAdapter(CreatureStore.getCreatures().toMutableList())
 
+    private lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var layoutManager: GridLayoutManager
     private lateinit var listItemDecoration: RecyclerView.ItemDecoration
     private lateinit var gridItemDecoration: RecyclerView.ItemDecoration
@@ -68,33 +72,44 @@ class AllFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        layoutManager = GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false)
-        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
+        setRecyclerView()
+        setItemDecoration()
+        setUpItemTouchHelper()
+        setScrollDirection()
+    }
+
+    private fun setRecyclerView() {
+        layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return (creaturesAdapter.spanSizePosition(position))
             }
         }
         creatureList.layoutManager = layoutManager
         creatureList.adapter = creaturesAdapter
+    }
 
+    private fun setScrollDirection() {
+        creatureList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                creaturesAdapter.scrollDirection = if (dy > 0) {
+                    CreaturesCardAdapter.ScrollDirection.DOWN
+                } else {
+                    CreaturesCardAdapter.ScrollDirection.UP
+                }
+            }
+        })
+    }
+
+    private fun setItemDecoration() {
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.creature_card_grid_layout_margin)
 
         listItemDecoration = SpacingItemDecoration(1, spacingInPixels)
         gridItemDecoration = SpacingItemDecoration(2, spacingInPixels)
 
         creatureList.addItemDecoration(gridItemDecoration)
-
-        creatureList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                creaturesAdapter.scrollDirection = if (dy > 0){
-                    CreaturesCardAdapter.ScrollDirection.DOWN
-                }else{
-                    CreaturesCardAdapter.ScrollDirection.UP
-                }
-            }
-        })
     }
 
     private fun updateRecyclerView(spanCount: Int, addItemDecoration: RecyclerView.ItemDecoration,
@@ -109,6 +124,7 @@ class AllFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
@@ -145,6 +161,11 @@ class AllFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setUpItemTouchHelper(){
+        itemTouchHelper = ItemTouchHelper(ItemTouchHelperCardCallback(creaturesAdapter))
+        itemTouchHelper.attachToRecyclerView(creatureList)
     }
 
 

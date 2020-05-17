@@ -13,7 +13,9 @@ import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.app.Constant
 import com.raywenderlich.android.creatures.app.inflate
 import com.raywenderlich.android.creatures.model.Creature
+import com.raywenderlich.android.creatures.model.Favorites
 import com.raywenderlich.android.creatures.ui.CreatureActivity
+import com.raywenderlich.android.creatures.utils.ItemTouchHelperListener
 import kotlinx.android.synthetic.main.list_item_creature_card.view.*
 import kotlinx.android.synthetic.main.list_item_creature_card.view.creatureCardContainer
 import kotlinx.android.synthetic.main.list_item_creature_card.view.creatureImageCard
@@ -21,8 +23,10 @@ import kotlinx.android.synthetic.main.list_item_creature_card.view.fullName
 import kotlinx.android.synthetic.main.list_item_creature_card.view.nameHolder
 import kotlinx.android.synthetic.main.list_item_creature_card_jupiter.view.*
 import java.lang.IllegalArgumentException
+import java.util.*
 
-class CreaturesCardAdapter(private val creature: MutableList<Creature>) : RecyclerView.Adapter<CreaturesCardAdapter.ViewHolder>() {
+class CreaturesCardAdapter(private val creature: MutableList<Creature>) :
+        RecyclerView.Adapter<CreaturesCardAdapter.ViewHolder>(), ItemTouchHelperListener {
 
     var scrollDirection = ScrollDirection.DOWN
     var jupiterSpanSize = 2
@@ -121,5 +125,19 @@ class CreaturesCardAdapter(private val creature: MutableList<Creature>) : Recycl
 
     enum class ViewType{
         JUPITER,MARS ,OTHER
+    }
+
+    override fun onItemMove(recyclerView: RecyclerView, fromPosition: Int, toPosition: Int): Boolean {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                Collections.swap(creature, i, i + 1)
+            }
+        } else {
+            for (i in fromPosition downTo toPosition + 1) {
+                Collections.swap(creature, i, i - 1)
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition)
+        return true
     }
 }
