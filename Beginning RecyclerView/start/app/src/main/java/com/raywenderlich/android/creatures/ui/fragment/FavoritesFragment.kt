@@ -34,6 +34,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,7 @@ import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.adapter.FavoriteAdapter
 import com.raywenderlich.android.creatures.model.CreatureStore
 import com.raywenderlich.android.creatures.utils.DividingItemDecoration
+import com.raywenderlich.android.creatures.utils.ItemTouchHelperCallback
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
@@ -63,6 +65,7 @@ class FavoritesFragment : Fragment() {
 
     favoriteList.layoutManager = LinearLayoutManager(activity)
     favoriteList.adapter = favoriteAdapter
+    setUpItemTouchHelper()
 
     val heightInPixels = resources.getDimensionPixelSize(R.dimen.list_item_divider_height)
     favoriteList.addItemDecoration(DividingItemDecoration(ContextCompat.getColor(context!!, R.color.colorDivider), heightInPixels))
@@ -70,7 +73,12 @@ class FavoritesFragment : Fragment() {
 
   override fun onResume() {
     super.onResume()
-    val composites = activity?.let { CreatureStore.getFavoriteComposites(it) }
-    composites?.let { favoriteAdapter.updateCreature(it) }
+    val favorite = activity?.let { CreatureStore.getFavoriteCreature(it) }
+    favorite?.let { favoriteAdapter.updateCreature(it) }
+  }
+
+  private fun setUpItemTouchHelper(){
+    val itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(favoriteAdapter))
+    itemTouchHelper.attachToRecyclerView(favoriteList)
   }
 }

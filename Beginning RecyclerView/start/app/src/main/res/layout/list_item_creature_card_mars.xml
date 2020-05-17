@@ -39,7 +39,7 @@
             android:layout_gravity="bottom"
             android:alpha="0.9"
             android:background="@color/colorAccent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/fullName"
@@ -53,6 +53,19 @@
                 android:textSize="@dimen/creature_card_text_size"
                 android:textStyle="bold"
                 tools:text="NickName" />
+
+            <TextView
+                android:id="@+id/slogan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/padding_half"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/createture_text_slogan_size"
+                android:textStyle="bold"
+                android:text="@string/i_love_mars"
+                />
 
 
         </LinearLayout>

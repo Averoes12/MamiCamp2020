@@ -8,41 +8,42 @@ import com.raywenderlich.android.creatures.R
 import com.raywenderlich.android.creatures.app.inflate
 import com.raywenderlich.android.creatures.model.CompositeItem
 import com.raywenderlich.android.creatures.model.Creature
+import com.raywenderlich.android.creatures.model.Favorites
 import com.raywenderlich.android.creatures.ui.CreatureActivity
+import com.raywenderlich.android.creatures.utils.ItemTouchHelperListener
 import kotlinx.android.synthetic.main.list_item_creature.view.*
 import kotlinx.android.synthetic.main.list_item_planet_header.view.*
 import java.lang.IllegalArgumentException
+import java.util.*
 
-class FavoriteAdapter (private val compositesItem:MutableList<CompositeItem>) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+class FavoriteAdapter (private val creature:MutableList<Creature>) :
+        RecyclerView.Adapter<FavoriteAdapter.ViewHolder>(), ItemTouchHelperListener {
 
 
-    fun updateCreature(creature: List<CompositeItem>){
-        this.compositesItem.clear()
-        this.compositesItem.addAll(creature)
+    fun updateCreature(creature: List<Creature>){
+        this.creature.clear()
+        this.creature.addAll(creature)
         notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return when(viewType){
-            ViewType.HEADER.ordinal -> ViewHolder(parent.inflate(R.layout.list_item_planet_header))
-            ViewType.CREATURE.ordinal -> ViewHolder(parent.inflate(R.layout.list_item_creature))
-            else -> throw IllegalArgumentException()
-        }
+        return ViewHolder(parent.inflate(R.layout.list_item_creature))
+
     }
 
-    override fun getItemCount(): Int = compositesItem.size
+    override fun getItemCount(): Int = creature.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bind(compositesItem = compositesItem[position])
+        holder.bind(creature = creature[position])
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (compositesItem[position].isHeader){
-            ViewType.HEADER.ordinal
-        }else{
-            ViewType.CREATURE.ordinal
-        }
-    }
+//    override fun getItemViewType(position: Int): Int {
+//        return if (creature[position].isHeader){
+//            ViewType.HEADER.ordinal
+//        }else{
+//            ViewType.CREATURE.ordinal
+//        }
+//    }
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
@@ -52,17 +53,17 @@ class FavoriteAdapter (private val compositesItem:MutableList<CompositeItem>) : 
             itemView.setOnClickListener(this)
         }
 
-        fun bind(compositesItem: CompositeItem){
-            if (compositesItem.isHeader){
-                itemView.headerName.text = compositesItem.header.name
-            }else{
-                this.creature = compositesItem.creature
+        fun bind(creature: Creature){
+//            if (creature.isHeader){
+//                itemView.headerName.text = creature.header.name
+//            }else{
+                this.creature = creature
                 val context = itemView.context
-                itemView.creatureImage.setImageResource(context.resources.getIdentifier(creature.uri, null, context.packageName))
-                itemView.fullNames.text = creature.fullName
-                itemView.nickname.text = creature.nickname
+                itemView.creatureImage.setImageResource(context.resources.getIdentifier(this.creature.uri, null, context.packageName))
+                itemView.fullNames.text = this.creature.fullName
+                itemView.nickname.text = this.creature.nickname
                 animationView(itemView)
-            }
+//            }
         }
 
         override fun onClick(view: View) {
@@ -81,5 +82,20 @@ class FavoriteAdapter (private val compositesItem:MutableList<CompositeItem>) : 
     }
     enum class ViewType{
         HEADER, CREATURE
+    }
+
+    override fun onItemMove(recyclerView: RecyclerView, fromPosition: Int, toPosition: Int): Boolean {
+        if (fromPosition < toPosition){
+            for (i in fromPosition until toPosition){
+                Collections.swap(creature, i, i+1)
+            }
+        }else{
+            for (i in fromPosition downTo toPosition +1){
+                Collections.swap(creature, i , i -1)
+            }
+        }
+        Favorites.saveFavorites(creature.map { it.id }, recyclerView.context)
+        notifyItemMoved(fromPosition, toPosition)
+        return true
     }
 }

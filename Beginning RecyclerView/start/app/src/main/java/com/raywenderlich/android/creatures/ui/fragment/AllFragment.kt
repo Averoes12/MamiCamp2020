@@ -48,7 +48,7 @@ class AllFragment : Fragment() {
 
     private val creaturesAdapter = CreaturesCardAdapter(CreatureStore.getCreatures().toMutableList())
 
-    private lateinit var layoutManager: StaggeredGridLayoutManager
+    private lateinit var layoutManager: GridLayoutManager
     private lateinit var listItemDecoration: RecyclerView.ItemDecoration
     private lateinit var gridItemDecoration: RecyclerView.ItemDecoration
     private lateinit var listMenuItem: MenuItem
@@ -68,8 +68,12 @@ class AllFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        layoutManager = StaggeredGridLayoutManager(2, GridLayoutManager.VERTICAL)
-
+        layoutManager = GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false)
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
+            override fun getSpanSize(position: Int): Int {
+                return (creaturesAdapter.spanSizePosition(position))
+            }
+        }
         creatureList.layoutManager = layoutManager
         creatureList.adapter = creaturesAdapter
 
@@ -96,6 +100,7 @@ class AllFragment : Fragment() {
     private fun updateRecyclerView(spanCount: Int, addItemDecoration: RecyclerView.ItemDecoration,
                                    removingItemDecoration: RecyclerView.ItemDecoration) {
         layoutManager.spanCount = spanCount
+        creaturesAdapter.jupiterSpanSize = spanCount
         creatureList.removeItemDecoration(removingItemDecoration)
         creatureList.addItemDecoration(addItemDecoration)
     }
