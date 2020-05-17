@@ -118,4 +118,10 @@ class FavoriteAdapter(private val creature: MutableList<Creature>, private val i
         notifyItemMoved(fromPosition, toPosition)
         return true
     }
+
+    override fun onItemDismiss(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        Favorites.removeFavorite(creature[position], viewHolder.itemView.context)
+        creature.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }
