@@ -2,6 +2,7 @@ package com.raywenderlich.android.creatures.utils
 
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import com.raywenderlich.android.creatures.adapter.FavoriteAdapter
 
 class ItemTouchHelperCallback(private val listener: ItemTouchHelperListener) : ItemTouchHelper.Callback() {
 

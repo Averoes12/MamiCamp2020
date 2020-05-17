@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/grayscale"
+    android:title="@string/grayscale"
+      android:icon="@drawable/ic_format_color"
+      app:showAsAction="ifRoom"/>
+  <item
+    android:id="@+id/blur"
+    android:title="@string/blur"
+      android:icon="@drawable/ic_blur_"
+      app:showAsAction="ifRoom"/>
+  <item
+    android:id="@+id/cropCircle"
+    android:title="@string/crop_square"
+      android:icon="@drawable/ic_color_lens_"
+      app:showAsAction="ifRoom"/>
+</menu>
