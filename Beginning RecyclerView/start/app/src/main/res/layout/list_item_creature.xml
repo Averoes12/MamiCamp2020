@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listItemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_with_divider_height">
+
+    <ImageView
+        android:id="@+id/creatureImage"
+        android:layout_width="@dimen/list_item_creature_height"
+        android:layout_height="@dimen/list_item_creature_height"
+        android:layout_marginStart="@dimen/padding_standard"
+        android:contentDescription="@string/content_creature"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/creature_cat_derp" />
+
+    <TextView
+        android:id="@+id/fullNames"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_standard"
+        android:layout_marginTop="@dimen/padding_half"
+        android:layout_marginEnd="@dimen/padding_standard"
+        android:layout_marginBottom="@dimen/padding_half"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/creature_name_textSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/creatureImage"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Full name" />
+
+    <TextView
+        android:id="@+id/nickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginStart="@dimen/padding_standard"
+        android:layout_marginTop="@dimen/padding_half"
+        android:layout_marginEnd="@dimen/padding_standard"
+        android:layout_marginBottom="@dimen/padding_half"
+        app:layout_constraintStart_toEndOf="@id/creatureImage"
+        app:layout_constraintTop_toBottomOf="@id/fullNames"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Nickname" />
+
+    <ImageView
+        android:id="@+id/handleDrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_reorder_24px"
+        android:tint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fullNames"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/padding_standard"
+        android:contentDescription="@string/handleicon"
+        />
+</android.support.constraint.ConstraintLayout>
